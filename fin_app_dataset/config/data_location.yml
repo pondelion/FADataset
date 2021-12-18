@@ -1,0 +1,12 @@
+STOCKLIST_FILE: s3://fin-app/stocklist/stocklist.csv
+STOCKPRICE_BASEDIR: s3://fin-app/stockprice
+STOCKPRICE_CONCAT_BASEDIR: s3://fin-app/stockprice_concat
+STOCKPRICE_STOOQ_CONCAT_BASEDIR: s3://fin-app/stockprice_concat/stooq
+STOCKPRICE_CANDLECHART_BASEDIR: s3://fin-app/stockprice_candlechart
+ECONOMIC_INDICATOR_BASEDIR: s3://fin-app/economic_indicator
+COMPANY_DATA: s3://fin-app/company_data/company_financial_data.csv
+# TWITTER_MEDIAFILE_DIR: s3://fin-app/twitter/media
+TWITTER_MEDIAFILE_DIR: s3://i-app/twitter/media
+EDINET_SECURITIES_REPORT_DOCINFO_DIR: s3://fin-app/securities_report/edinet/docinfo
+EDINET_SECURITIES_REPORT_PDF_DIR: s3://fin-app/securities_report/edinet/pdf
+LOCAL_CACHE_DIR: /var/tmp
