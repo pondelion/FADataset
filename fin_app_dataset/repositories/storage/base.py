@@ -2,12 +2,11 @@ from abc import ABCMeta, abstractmethod
 from enum import Enum
 
 
-class DBType(Enum):
-    AMAZON_RDS = 'amazon_rds'
-    DYNAMO_DB = 'dynamo_db'
+class StorageType(Enum):
+    S3 = 's3'
 
 
-class DB(metaclass=ABCMeta):
+class BaseStorageRepository(metaclass=ABCMeta):
 
     @abstractmethod
     def save(self, **kwargs):
@@ -18,18 +17,10 @@ class DB(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def get_list(self, **kwargs):
+    def get_filelist(self, **kwargs):
         raise NotImplementedError
 
     @property
     @abstractmethod
-    def type(self) -> DBType:
+    def type(self) -> StorageType:
         raise NotImplementedError
-
-
-def init_db() -> None:
-    init_rdb()
-
-
-def delete_all_tables() -> None:
-    pass

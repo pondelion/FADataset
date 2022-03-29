@@ -10,6 +10,8 @@ pandas = "*"
 overrides = "*"
 pyyaml = "*"
 fin-app-dataset = {editable = true, path = "."}
+sqlalchemy = "*"
+pydantic = "*"
 
 [dev-packages]
 
