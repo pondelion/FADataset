@@ -1,3 +1,3 @@
 from .company import CompanyModel
 from .sector import SectorModel
-from .stockprice import StockpriceModel
+from .stockprice import StqDailyStockpriceModel

@@ -1,11 +1,11 @@
 from abc import ABCMeta, abstractmethod
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 
-from fastapi.encoders import jsonable_encoder
+# from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
-from ...db.rdb import Session
-from ...models.sqlalchemy.base import Base
+from ...models.rdb.base import Base
 
 
 ModelType = TypeVar('ModelType', bound=Base)
@@ -57,7 +57,8 @@ class BaseRDBRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             db_data = self.get_by_filter(db, filter_conditions=check_already_exists_filter_conditions)
             if db_data:
                 return db_data
-        json_data = jsonable_encoder(data)
+        # json_data = jsonable_encoder(data)
+        json_data = data.dict(exclude_unset=True)
         db_data = self._model(**json_data)
         db.add(db_data)
         if commit:
@@ -85,7 +86,8 @@ class BaseRDBRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             data_list = [data for data, data_in_db in zip(data_list, data_list_in_db) if len(data_in_db) == 0]
         if len(data_list) == 0:
             return []
-        db_data_list = [self._model(**jsonable_encoder(data)) for data in data_list]
+        # db_data_list = [self._model(**jsonable_encoder(data)) for data in data_list]
+        db_data_list = [self._model(**data.dict(exclude_unset=True)) for data in data_list]
         # db.add_all(db_data_list)
         db.bulk_save_objects(db_data_list, return_defaults=True)
         if commit:
@@ -100,7 +102,8 @@ class BaseRDBRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         update_data: Union[UpdateSchemaType, Dict[str, Any]],
         commit: bool = True,
     ) -> ModelType:
-        json_data = jsonable_encoder(db_data)
+        # json_data = jsonable_encoder(db_data)
+        json_data = db_data.dict(exclude_unset=True)
         if isinstance(update_data, dict):
             update_data_dict = update_data
         else:
@@ -144,7 +147,7 @@ class BaseRDBRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         db.delete(obj)
         if commit:
             db.commit()
-        return ooj
+        return obj
 
     def exists(self, db: Session, *, id: int) -> bool:
         return True if db.query(self._model).get(id) else False

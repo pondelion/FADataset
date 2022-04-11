@@ -7,6 +7,7 @@ from pydantic import BaseModel
 class CompanySchema(BaseModel):
     code: int
     name: str
+    market: Optional[str]
 
 
 class CompanyInDBSchema(CompanySchema):

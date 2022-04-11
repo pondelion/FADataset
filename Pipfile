@@ -7,11 +7,13 @@ name = "pypi"
 boto3 = "*"
 s3fs = "*"
 pandas = "*"
-overrides = "*"
 pyyaml = "*"
 fin-app-dataset = {editable = true, path = "."}
 sqlalchemy = "*"
 pydantic = "*"
+sqlalchemy-utils = "*"
+overrides = "*"
+mysqlclient = "*"
 
 [dev-packages]
 

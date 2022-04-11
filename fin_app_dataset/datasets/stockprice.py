@@ -8,7 +8,7 @@ from .base.s3_csv_cached_data import S3CSVCachedData
 from ..utils.config import DataLocationConfig
 
 
-class StockPrice(S3CSVCachedData):
+class StqStockPrice(S3CSVCachedData):
 
     def __init__(
         self,

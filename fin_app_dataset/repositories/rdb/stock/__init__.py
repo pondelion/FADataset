@@ -1,3 +1,3 @@
 from .company import CompanyRepository
-from .stockprice import DailyStockpriceRepository
+from .stockprice import StqDailyStockpriceRepository
 from .sector import SectorRepository

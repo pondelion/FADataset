@@ -5,9 +5,9 @@ from sqlalchemy.sql.functions import current_timestamp
 from ..base import Base
 
 
-class DailyStockpriceModel(Base):
+class YFDailyStockpriceModel(Base):
     id = Column(BigInteger, primary_key=True, index=True, autoincrement=True, nullable=False)
-    date = Column(DateTime, nullable=False)
+    date = Column(Date, nullable=False)
     open = Column(Integer, nullable=False)
     close = Column(Integer, nullable=False)
     high = Column(Integer, nullable=False)
@@ -22,3 +22,18 @@ class DailyStockpriceModel(Base):
     #     server_default=current_timestamp(6),
     #     onupdate=current_timestamp(6)
     # )
+
+
+class StqDailyStockpriceModel(Base):
+    id = Column(BigInteger, primary_key=True, index=True, autoincrement=True, nullable=False)
+    date = Column(Date, nullable=False)
+    open = Column(Integer, nullable=False)
+    close = Column(Integer, nullable=False)
+    high = Column(Integer, nullable=False)
+    low = Column(Integer, nullable=False)
+    volume = Column(Integer, nullable=False)
+    company_code = Column(BigInteger, ForeignKey("company.code"), nullable=False)
+    created_at = Column(
+        DATETIME(fsp=6),
+        server_default=current_timestamp(6)
+    )

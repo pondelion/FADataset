@@ -9,6 +9,7 @@ class CompanyModel(Base):
     code = Column(BigInteger, primary_key=True, index=True, autoincrement=False, nullable=False)
     name = Column(TEXT, nullable=False)
     sector_id = Column(BigInteger, ForeignKey("sector.id"), nullable=True)
+    market = Column(TEXT, nullable=True)
     created_at = Column(
         DATETIME(fsp=6),
         server_default=current_timestamp(6)

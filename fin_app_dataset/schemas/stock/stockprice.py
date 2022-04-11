@@ -8,8 +8,9 @@ class DailyStockpriceSchema(BaseModel):
     date: date
     open: int
     close: int
-    high: str
+    high: int
     low: int
+    volume: Optional[int]
 
 
 class DailyStockpriceInDBSchema(DailyStockpriceSchema):

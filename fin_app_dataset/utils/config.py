@@ -39,10 +39,16 @@ class _AWSConfig(type):
         config = _load_aws_config()
         if 'ACCESS_KEY_ID' in config:
             os.environ['AWS_ACCESS_KEY_ID'] = config['ACCESS_KEY_ID']
+        elif 'AWS_ACCESS_KEY_ID' in os.environ:
+            config['ACCESS_KEY_ID'] = os.environ['AWS_ACCESS_KEY_ID']
         if 'SECRET_ACCESS_KEY' in config:
             os.environ['AWS_SECRET_ACCESS_KEY'] = config['SECRET_ACCESS_KEY']
+        elif 'AWS_SECRET_ACCESS_KEY' in os.environ:
+            config['SECRET_ACCESS_KEY'] = os.environ['AWS_SECRET_ACCESS_KEY']
         if 'REGION_NAME' in config:
             os.environ['AWS_DEFAULT_REGION'] = config['REGION_NAME']
+        elif 'AWS_DEFAULT_REGION' in os.environ:
+            config['REGION_NAME'] = os.environ['AWS_DEFAULT_REGION']
     except Exception as e:
         config = {}
         Logger.w('_AWSConfig', f'failed to load aws config file : {e}')

@@ -14,5 +14,5 @@ class SectorInDBSchema(SectorSchema):
     updated_at: datetime
 
 
-class SectorCreateSchema(BaseModel):
+class SectorCreateSchema(SectorSchema):
     pass

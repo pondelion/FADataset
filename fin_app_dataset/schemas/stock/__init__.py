@@ -1,7 +1,7 @@
 from .stockprice import (
-    SectorSchema,
-    SectorInDBSchema,
-    SectorCreateSchema,
+    DailyStockpriceSchema,
+    DailyStockpriceInDBSchema,
+    DailyStockpriceCreateSchema,
 )
 from .company import (
     CompanySchema,

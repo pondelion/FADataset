@@ -11,4 +11,5 @@ class Base:
 
     @declared_attr
     def __tablename__(cls) -> str:
-        return f'{cls.__name__.lower()}'
+        print(f'{cls.__name__.lower()}'.replace('model', ''))
+        return f'{cls.__name__.lower()}'.replace('model', '')

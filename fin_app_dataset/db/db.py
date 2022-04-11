@@ -1,6 +1,10 @@
 from abc import ABCMeta, abstractmethod
 from enum import Enum
 
+from .rdb import (
+    init_rdb,
+)
+
 
 class DBType(Enum):
     AMAZON_RDS = 'amazon_rds'
@@ -27,8 +31,8 @@ class DB(metaclass=ABCMeta):
         raise NotImplementedError
 
 
-def init_db() -> None:
-    init_rdb()
+def init_db(recreate_databse: bool = False, recreate_table: bool = False) -> None:
+    init_rdb(recreate_databse, recreate_table)
 
 
 def delete_all_tables() -> None:
