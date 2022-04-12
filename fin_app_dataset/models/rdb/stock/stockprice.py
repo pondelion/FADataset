@@ -25,14 +25,14 @@ class YFDailyStockpriceModel(Base):
 
 
 class StqDailyStockpriceModel(Base):
-    id = Column(BigInteger, primary_key=True, index=True, autoincrement=True, nullable=False)
-    date = Column(Date, nullable=False)
+    # id = Column(BigInteger, primary_key=True, index=True, autoincrement=True, nullable=False)
+    date = Column(Date, nullable=False, primary_key=True, index=True)
     open = Column(Integer, nullable=False)
     close = Column(Integer, nullable=False)
     high = Column(Integer, nullable=False)
     low = Column(Integer, nullable=False)
     volume = Column(Integer, nullable=False)
-    company_code = Column(BigInteger, ForeignKey("company.code"), nullable=False)
+    company_code = Column(BigInteger, ForeignKey("company.code"), nullable=False, primary_key=True, index=True)
     created_at = Column(
         DATETIME(fsp=6),
         server_default=current_timestamp(6)

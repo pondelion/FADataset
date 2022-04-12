@@ -14,6 +14,7 @@ pydantic = "*"
 sqlalchemy-utils = "*"
 overrides = "*"
 mysqlclient = "*"
+jpholiday = "*"
 
 [dev-packages]
 

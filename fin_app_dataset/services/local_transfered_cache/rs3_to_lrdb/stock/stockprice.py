@@ -3,7 +3,9 @@ from typing import List, Optional
 
 from sqlalchemy.orm import Session
 import pandas as pd
+import jpholiday
 
+from .company import CompanyService
 from ..base import Base
 from .....models.rdb.stock import StqDailyStockpriceModel
 from .....repositories.rdb.stock import StqDailyStockpriceRepository
@@ -19,6 +21,8 @@ class StqStockpriceService(Base):
             StqDailyStockpriceRepository(),
             StqStockpriceS3Repository(),
         )
+        self._company_svc = CompanyService()
+        companies = self._company_svc.get_all()
 
     def get_by_code(self, code: int, convert_to_df: bool = True) -> Optional[List[StqDailyStockpriceModel]]:
         records = self._local_rdb_repo.get_by_code(self._local_db, code=code)
@@ -67,6 +71,10 @@ class StqStockpriceService(Base):
         day: int,
         convert_to_df: bool = True,
     ) -> Optional[List[StqDailyStockpriceModel]]:
+        dt = date(year, month, day)
+        if dt.weekday() >= 5 or jpholiday.is_holiday(dt):
+            Logger.w('StqStockpriceService.get_by_ymd', f'specified day {dt} is holyday')
+            return pd.DataFrame([]) if convert_to_df else []
         records = self._local_rdb_repo.get_by_ymd(
             self._local_db, code=code, year=year, month=month, day=day,
         )

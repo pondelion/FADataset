@@ -34,9 +34,7 @@ class StqDailyStockpriceRepository(BaseRDBRepository[StqDailyStockpriceModel, Da
     def get_by_ymd(self, db: Session, *, code: int, year: int, month: int, day: int) -> Optional[List[StqDailyStockpriceModel]]:
         return db.query(self._model).filter(
             self._model.company_code == code,
-            extract('year', self._model.date) == year,
-            extract('month', self._model.date) == month,
-            extract('day', self._model.date) == day,
+            self._model.date == date(year, month, day)
         ).all()
 
     def get_by_date(self, db: Session, *, code: int, date: date) -> Optional[List[StqDailyStockpriceModel]]:

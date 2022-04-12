@@ -56,9 +56,18 @@ def show_tables() -> None:
 
 def drop_tables() -> None:
     # Base.metadata.drop_all(local_engine)
-    StqDailyStockpriceModel.__table__.drop(local_engine)
-    CompanyModel.__table__.drop(local_engine)
-    SectorModel.__table__.drop(local_engine)
+    try:
+        StqDailyStockpriceModel.__table__.drop(local_engine)
+    except Exception as e:
+        print(e)
+    try:
+        CompanyModel.__table__.drop(local_engine)
+    except Exception as e:
+        print(e)
+    try:
+        SectorModel.__table__.drop(local_engine)
+    except Exception as e:
+        print(e)
 
 
 def delete_all_tables() -> None:
