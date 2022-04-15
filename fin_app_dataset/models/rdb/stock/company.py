@@ -1,6 +1,7 @@
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, BigInteger
 from sqlalchemy.dialects.mysql import DATETIME, TEXT
 from sqlalchemy.sql.functions import current_timestamp
+from sqlalchemy.orm import relationship
 
 from ..base import Base
 
@@ -19,3 +20,4 @@ class CompanyModel(Base):
         server_default=current_timestamp(6),
         onupdate=current_timestamp(6)
     )
+    sector = relationship("SectorModel", back_populates="company")

@@ -8,6 +8,7 @@ from ..models.rdb.stock import (
     CompanyModel,
     SectorModel,
     StqDailyStockpriceModel,
+    YFDailyStockpriceModel,
 )
 from ..utils.logger import Logger
 
@@ -58,6 +59,10 @@ def drop_tables() -> None:
     # Base.metadata.drop_all(local_engine)
     try:
         StqDailyStockpriceModel.__table__.drop(local_engine)
+    except Exception as e:
+        print(e)
+    try:
+        YFDailyStockpriceModel.__table__.drop(local_engine)
     except Exception as e:
         print(e)
     try:
