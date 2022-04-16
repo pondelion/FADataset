@@ -1,5 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, BigInteger
-from sqlalchemy.dialects.mysql import DATETIME, TEXT
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, BigInteger, Text
 from sqlalchemy.sql.functions import current_timestamp
 from sqlalchemy.orm import relationship
 
@@ -8,14 +7,14 @@ from ..base import Base
 
 class SectorModel(Base):
     id = Column(BigInteger, primary_key=True, index=True, autoincrement=True, nullable=False)
-    name = Column(TEXT, nullable=False)
+    name = Column(Text, nullable=False)
     created_at = Column(
-        DATETIME(fsp=6),
-        server_default=current_timestamp(6)
+        DateTime,
+        server_default=current_timestamp()
     )
     updated_at = Column(
-        DATETIME(fsp=6),
-        server_default=current_timestamp(6),
-        onupdate=current_timestamp(6)
+        DateTime,
+        server_default=current_timestamp(),
+        onupdate=current_timestamp()
     )
     company = relationship("CompanyModel", back_populates="sector")

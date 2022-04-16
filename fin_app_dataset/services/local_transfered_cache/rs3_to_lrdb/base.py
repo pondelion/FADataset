@@ -10,14 +10,16 @@ from ....models.rdb.base import Base
 
 
 ModelType = TypeVar('ModelType', bound=Base)
+RDBRepoType = TypeVar('RDBRepoType', bound=BaseRDBRepository)
+S3RepoType = TypeVar('S3RepoType', bound=BaseS3Repository)
 
 
 class Base:
 
     def __init__(
         self,
-        local_rdb_repo: BaseRDBRepository,
-        remote_s3_repo: BaseS3Repository,
+        local_rdb_repo: RDBRepoType,
+        remote_s3_repo: S3RepoType,
         local_db: Session = local_db,
     ):
         self._local_db = local_db

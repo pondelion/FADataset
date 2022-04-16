@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy_utils import database_exists, create_database, drop_database
 
 from ..settings import settings
@@ -9,6 +9,9 @@ from ..models.rdb.stock import (
     SectorModel,
     StqDailyStockpriceModel,
     YFDailyStockpriceModel,
+)
+from ..models.rdb.news import (
+    GoogleNewsModel,
 )
 from ..utils.logger import Logger
 
@@ -33,7 +36,8 @@ local_engine = create_engine(
     pool_pre_ping=True
 )
 
-LocalSession = sessionmaker(autocommit=False, autoflush=False, bind=local_engine)
+LocalSession = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=local_engine))
+# Base.query = LocalSession.query_property()
 
 local_db = LocalSession()
 print(local_engine.table_names())
@@ -71,6 +75,10 @@ def drop_tables() -> None:
         print(e)
     try:
         SectorModel.__table__.drop(local_engine)
+    except Exception as e:
+        print(e)
+    try:
+        Base.metadata.drop_all(local_engine)
     except Exception as e:
         print(e)
 

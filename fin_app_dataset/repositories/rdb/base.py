@@ -30,7 +30,7 @@ class BaseRDBRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         res = None
         for fc in filter_conditions:
             if res is None:
-                res = db.query(self._model).filter(fc)
+                res = self._model.query.filter(fc)
             else:
                 res = res.filter(fc)
         return res.all()
@@ -38,7 +38,7 @@ class BaseRDBRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     def get_multi(
         self, db: Session, *, skip: int = 0, limit: int = 100
     ) -> List[ModelType]:
-        return db.query(self._model).offset(skip).limit(limit).all()
+        return self._model.query.offset(skip).limit(limit).all()
 
     def create(
         self,
