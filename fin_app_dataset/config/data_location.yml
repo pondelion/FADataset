@@ -1,4 +1,6 @@
 STOCKLIST_FILE: s3://fin-app/stocklist/stocklist.csv
+STOCKLIST_FILE_20220625: s3://fin-app/stocklist/stocklist_20220625.csv
+STOCKLIST_FILE_LATEST: s3://fin-app/stocklist/stocklist_latest.csv
 STOCKPRICE_BASEDIR: s3://fin-app/stockprice
 STOCKPRICE_CONCAT_BASEDIR: s3://fin-app/stockprice_concat
 STOCKPRICE_STOOQ_CONCAT_BASEDIR: s3://fin-app/stockprice_concat/stooq

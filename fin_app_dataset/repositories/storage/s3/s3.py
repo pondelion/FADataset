@@ -14,7 +14,6 @@ class BaseS3Repository(BaseStorageRepository):
     def __init__(self, bucket_name: str = AWSConfig.S3_BUCKET_NAME):
         super().__init__()
         self._bucket_name = bucket_name
-        print(bucket_name)
         try:
             S3_resource.create_bucket(
                 Bucket=bucket_name,
