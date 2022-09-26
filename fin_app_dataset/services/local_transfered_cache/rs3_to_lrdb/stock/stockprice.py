@@ -120,7 +120,6 @@ class StqStockpriceService(Base):
         df_renamed['date'] = df_renamed.index
         dict_list = df_renamed.apply(lambda x: {col: x[col] for col in df_renamed.columns}, axis=1).tolist()
         [d.update({'company_code': code}) for d in dict_list]
-        print(dict_list[0])
         schemas = [DailyStockpriceCreateSchema.parse_obj(d) for d in dict_list]
         Logger.i('StqStockpriceService', f"Start importing {code}'s stockprice data to local db")
         self._local_rdb_repo.create_all(self._local_db, data_list=schemas)

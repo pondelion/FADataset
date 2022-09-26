@@ -13,6 +13,9 @@ from ..models.rdb.stock import (
 from ..models.rdb.news import (
     GoogleNewsModel,
 )
+from ..models.rdb.financial import (
+    YFFinancialModel,
+)
 from ..utils.logger import Logger
 
 
@@ -28,6 +31,18 @@ def create_databse() -> None:
         create_database(settings.LOCAL_MYSQL_DATABASE_URI)
 
 
+def init_rdb(
+    recreate_database: bool = False,
+    recreate_table: bool = False
+) -> None:
+    if recreate_database:
+        delete_database()
+    create_databse()
+    if recreate_table:
+        drop_tables()
+    Base.metadata.create_all(local_engine)
+
+
 create_databse()
 
 local_engine = create_engine(
@@ -40,19 +55,8 @@ LocalSession = scoped_session(sessionmaker(autocommit=False, autoflush=False, bi
 # Base.query = LocalSession.query_property()
 
 local_db = LocalSession()
+init_rdb()
 print(local_engine.table_names())
-
-
-def init_rdb(
-    recreate_database: bool = False,
-    recreate_table: bool = False
-) -> None:
-    if recreate_database:
-        delete_database()
-    create_databse()
-    if recreate_table:
-        drop_tables()
-    Base.metadata.create_all(local_engine)
 
 
 def show_tables() -> None:
